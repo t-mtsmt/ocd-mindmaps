@@ -1,3 +1,5 @@
+from wcwidth import wcwidth
+
 class Utils:
 
     images_catalog = {}
@@ -42,7 +44,7 @@ class Utils:
     def len_text(text):
         size = 0
         for txt in text.split('\n'):
-            size = max(len(txt), size)
+            size = max(sum(max(wcwidth(ch), 1) for ch in txt), size)
         return size
 
     @staticmethod
