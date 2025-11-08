@@ -38,6 +38,11 @@ def draw(matrix, main_title="", main_title_logo=""):
         "gridModeEnabled": False,
         "viewBackgroundColor": Config.background_color
     }
+
+    for el in elements:
+        if isinstance(el, dict) and "text" in el and isinstance(el["text"], str):
+            el["text"] = el["text"].replace("\\n", "\n")
+
     return json.dumps({"type": "excalidraw",
                            "version": 2,
                            "source": "https://excalidraw.com",
