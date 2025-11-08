@@ -15,15 +15,20 @@ class Title(MapObject):
 
     def draw(self, x, y, color):
         elements = []
+
+        line_count = self.text.count("\n") + 1
+        per_line = 25
+        dynamic_height = max(Config.title_height, line_count * per_line)
+
         # end_x and end_y will be minimum to title draw size
         end_x = x + Config.title_width
-        end_y = y + Config.title_height
+        end_y = y + dynamic_height
 
         # draw all the content
         elements, end_x, end_y = self.draw_child(elements, x, y, end_x, end_y)
         total_size = end_y - y
         center_y = y + total_size / 2
-        title_y = center_y - Config.title_height / 2
+        title_y = center_y - dynamic_height / 2
 
         # draw out
         elements, end_x, end_y = self.draw_out(elements, y, center_y, total_size, end_x, end_y, color)
@@ -35,7 +40,7 @@ class Title(MapObject):
                 "x": x,
                 "y": title_y,
                 "width": Config.title_width,
-                "height": Config.title_height,
+                "height": dynamic_height,
                 "angle": 0,
                 "strokeColor": Config.border_color,
                 "backgroundColor": color,
@@ -61,7 +66,7 @@ class Title(MapObject):
                 "x": x,
                 "y": title_y,
                 "width": Config.title_width,
-                "height": Config.title_height,
+                "height": dynamic_height,
                 "angle": 0,
                 "strokeColor": Config.title_text_color,
                 "backgroundColor": "transparent",
