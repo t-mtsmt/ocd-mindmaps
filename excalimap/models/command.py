@@ -24,14 +24,14 @@ class Command(MapObject):
         text_padding = 5
         # end_x and end_y will be minimum to element size
 
-        lines = self.text.split("\\n")
+        lines = self.text.split("\n")
         longest_line = max(lines, key=lambda s: Utils.len_text(s))
         longest_len = Utils.len_text(longest_line)
 
         calc_width = text_padding + Config.image_width + text_padding + math.ceil(longest_len * 8.75)
         self.object_width = max(self.object_width, calc_width)
 
-        line_count = self.text.count("\\n") + 1
+        line_count = self.text.count("\n") + 1
         per_line = 25
         dynamic_height = max(Config.command_height, line_count * per_line)
 

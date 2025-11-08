@@ -47,15 +47,22 @@ class Utils:
 
     @staticmethod
     def split_text(text, size_newline):
-        if len(text) > size_newline:
-            middle_text = len(text) / 2
-            text_blocs = text.split(' ')
-            text_multiline = ''
-            split = False
-            for text_bloc in text_blocs:
-                if len(text_multiline) > middle_text and not split:
-                    text_multiline += '\n'
-                    split = True
-                text_multiline += text_bloc + ' '
-            text = text_multiline.strip()
-        return text
+        raw_lines = text.replace('\\n', '\n').split('\n')
+
+        processed_lines = []
+        for line in raw_lines:
+            if len(line) > size_newline:
+                middle_text = len(line) / 2
+                text_blocs = line.split(' ')
+                text_multiline = ''
+                split = False
+                for text_bloc in text_blocs:
+                    if len(text_multiline) > middle_text and not split:
+                        text_multiline += '\n'
+                        split = True
+                    text_multiline += text_bloc + ' '
+                processed_lines.append(text_multiline.strip())
+            else:
+                processed_lines.append(line)
+
+        return '\n'.join(processed_lines)

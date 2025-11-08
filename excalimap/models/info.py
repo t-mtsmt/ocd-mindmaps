@@ -20,7 +20,7 @@ class Info(MapObject):
     def draw(self, x, y):
         elements = []
 
-        lines = self.text.split("\\n")
+        lines = self.text.split("\n")
         longest_line = max(lines, key=lambda s: Utils.len_text(s))
         longest_len = Utils.len_text(longest_line)
 
@@ -28,7 +28,7 @@ class Info(MapObject):
         calc_width = math.ceil(longest_len * 10)
         self.object_width = max(calc_width,self.object_width)
 
-        line_count = self.text.count("\\n") + 1
+        line_count = self.text.count("\n") + 1
         per_line = 25
         dynamic_height = max(Config.info_height, line_count * per_line)
 
