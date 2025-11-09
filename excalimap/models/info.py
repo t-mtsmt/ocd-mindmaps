@@ -1,4 +1,5 @@
 import math
+import re
 
 from config import Config
 from models.arrow import Arrow
@@ -20,7 +21,7 @@ class Info(MapObject):
     def draw(self, x, y):
         elements = []
 
-        lines = self.text.split("\n")
+        lines = re.split(r'(?<!\\)\n', self.text)
         longest_line = max(lines, key=lambda s: Utils.len_text(s))
         longest_len = Utils.len_text(longest_line)
 

@@ -1,4 +1,5 @@
 import math
+import re
 
 from config import Config
 from models.mapobject import MapObject
@@ -18,11 +19,11 @@ class Title(MapObject):
     def draw(self, x, y, color):
         elements = []
 
-        lines = self.text.split("\n")
+        lines = re.split(r'(?<!\\)\n', self.text)
         longest_line = max(lines, key=lambda s: Utils.len_text(s))
         longest_len = Utils.len_text(longest_line)
 
-        calc_width = math.ceil(longest_len * 10)
+        calc_width = math.ceil(longest_len * 10 + 30)
         self.object_width = max(self.object_width, calc_width)
 
         line_count = self.text.count("\n") + 1

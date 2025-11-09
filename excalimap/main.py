@@ -39,16 +39,13 @@ def draw(matrix, main_title="", main_title_logo=""):
         "viewBackgroundColor": Config.background_color
     }
 
-    for el in elements:
-        if isinstance(el, dict) and "text" in el and isinstance(el["text"], str):
-            el["text"] = el["text"].replace("\\n", "\n")
-
-    return json.dumps({"type": "excalidraw",
+    json_output = json.dumps({"type": "excalidraw",
                            "version": 2,
                            "source": "https://excalidraw.com",
                            "elements": elements,
                            "appState": appstate,
                            "files": Utils.images_catalog}, indent=2)
+    return json_output.replace('\\\\n', '\\n')
 
 
 if __name__ == "__main__":

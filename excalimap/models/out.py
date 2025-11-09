@@ -1,3 +1,5 @@
+import re
+
 from config import Config
 from models.mapobject import MapObject
 from utils import Utils
@@ -83,7 +85,7 @@ class Out(MapObject):
         return element, end_x, end_y
 
     def draw_out_element(self, x, y, color):
-        lines = self.text.split("\n")
+        lines = re.split(r'(?<!\\)\n', self.text)
         per_line = 25
         dynamic_height = max(Config.out_height, len(lines) * per_line)
         y = y + (Config.out_height - dynamic_height) / 2
